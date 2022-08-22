@@ -1,5 +1,6 @@
 package com.almeralmazan.springbootmasterclass.customer;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -7,9 +8,14 @@ import java.util.List;
 @Service
 public class CustomerService {
 
+    private final CustomerRepo customerRepo;
+
+    @Autowired
+    public CustomerService(CustomerRepo customerRepo) {
+        this.customerRepo = customerRepo;
+    }
+
     public List<Customer> getAllCustomers() {
-        return List.of(
-                new Customer(1L, "Almer Almazan")
-        );
+        return customerRepo.getAllCustomers();
     }
 }
